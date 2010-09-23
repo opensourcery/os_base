@@ -76,7 +76,7 @@ function os_base_date_formats() {
     'time' => array(
       'g:ia',
       'H:i',
-      'g:ia (T)',
+      'g:ia T',
     ),
   );
   $formats = array();
