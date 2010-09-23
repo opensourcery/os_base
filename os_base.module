@@ -26,3 +26,78 @@ function os_base_block($op = 'view', $delta = 0, $edit = array()) {
   }
 
 }
+
+/**
+ * Implementation of hook_form_alter().
+ *
+ * - Sets the revisions as enabled for new content types.
+ */
+function os_base_form_alter(&$form, $form_state, $form_id) {
+  switch ($form_id) {
+    case 'node_type_form':
+      if (!isset($form['#node_type']->orig_type)) {
+        $options = array();
+        // Set to published by default.
+        $options[] = 'status';
+        // Enable revisions by default.
+        $options[] = 'revision';
+        $form['workflow']['node_options']['#default_value'] = $options;
+      }
+      break;
+  }
+
+  if (isset($form['type']['#value']) && $form_id == $form['type']['#value'] . '_node_form' && isset($form['revision_information'])) {
+    // Hide the revision log input.
+    $form['revision_information']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implementations of hook_date_format_types().
+ */
+function os_base_date_format_types() {
+  return array(
+    'day' => t('Day'),
+    'time' => t('Time'),
+  );
+}
+
+/**
+ * Implementation of hook_date_formats().
+ */
+function os_base_date_formats() {
+  $condensed = array(
+    'day' => array(
+      'j F Y',
+      'l, M j',
+      'l, j M',
+      'n/j/Y',
+    ),
+    'time' => array(
+      'g:ia',
+      'H:i',
+      'g:ia (T)',
+    ),
+  );
+  $formats = array();
+  foreach ($condensed as $type => $f) {
+    foreach ($f as $format) {
+      $formats[] = array(
+        'type' => $type,
+        'format' => $format,
+        'locales' => array(),
+      );
+    }
+  }
+  return $formats;
+}
+
+/**
+ * Preprocess page variables.
+ */
+function os_base_preprocess_page(&$vars) {
+  if (isset($vars['footer_message'])) {
+    // Replace @year with current year.
+    $vars['footer_message'] = str_replace('@year', date('Y'), $vars['footer_message']);
+  }
+}
