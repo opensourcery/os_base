@@ -109,3 +109,28 @@ function os_base_preprocess_page(&$vars) {
     $vars['footer_message'] = str_replace('@year', date('Y'), $vars['footer_message']);
   }
 }
+
+/**
+ * Implementation of hook_theme_registry_alter().
+ * Adds our preprocess function for regions right before zen_process().
+ */
+function os_base_theme_registry_alter(&$theme_registry) {
+  $preprocessors = array();
+  foreach ($theme_registry['region']['preprocess functions'] as $function) {
+    if ($function == 'zen_process') {
+      $preprocessors[] = 'os_base_preprocess_region';
+    }
+    $preprocessors[] = $function;
+  }
+  $theme_registry['region']['preprocess functions'] = $preprocessors;
+}
+
+/**
+ * Preprocess Zen regions: assign "dropdown-blocks" class to region(s).
+ */
+function os_base_preprocess_region(&$vars) {
+  $dropdown_regions = array('header');
+  if (in_array($vars['region'], $dropdown_regions)) {
+    $vars['classes_array'][] = 'dropdown-blocks';
+  }
+}
