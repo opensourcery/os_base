@@ -9,8 +9,9 @@ function _os_base_block_account() {
   $block['subject'] = '';
 
   if (!user_is_anonymous()) {
-    $block['content'] = "<div class='user-account-menu clear-block'>";
-    $block['content'] .= "<h3>". t('My account') ."</h3>". theme('links', os_base_account_links());
+    $block['content'] = "<div class='user-account-menu block-toggle'>";
+    $block['content'] .= "<div class='block-title'><h3>". t('My account') ."</h3></div>";
+    $block['content'] .= "<div class='block-content clear-block'>". theme('links', os_base_account_links()) ."</div>";
     $block['content'] .= "</div>";
     return $block;
   }

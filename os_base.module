@@ -7,6 +7,14 @@
 include_once('os_base.features.inc');
 
 /**
+ * Implementation of hook_init().
+ */
+function os_base_init() {
+  $path = drupal_get_path('module', 'os_base');
+  drupal_add_js($path .'/os_base.js');
+}
+
+/**
  * Implementation of hook_block().
  */
 function os_base_block($op = 'view', $delta = 0, $edit = array()) {
