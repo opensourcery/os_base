@@ -137,8 +137,13 @@ function os_base_theme_registry_alter(&$theme_registry) {
  * Preprocess Zen regions: assign "dropdown-blocks" class to region(s).
  */
 function os_base_preprocess_region(&$vars) {
-  $dropdown_regions = array('header');
-  drupal_alter('os_base_dropdown_regions_alter', $dropdown_regions);
+  // determine which regions to use (but just once)
+  static $dropdown_regions = NULL;
+  if (!$dropdown_regions) {
+    $dropdown_regions = array('header');
+    drupal_alter('os_base_dropdown_regions_alter', $dropdown_regions);
+  }
+
   if (in_array($vars['region'], $dropdown_regions)) {
     $vars['classes_array'][] = 'dropdown-blocks';
   }
