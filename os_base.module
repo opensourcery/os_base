@@ -115,6 +115,14 @@ function os_base_preprocess_page(&$vars) {
  * Adds our preprocess function for regions right before zen_process().
  */
 function os_base_theme_registry_alter(&$theme_registry) {
+  global $theme_key;
+
+  // We don't want to run for the admin theme
+  $admin_theme = variable_get('admin_theme', $theme_key);
+  if ($theme_key == $admin_theme || !isset($theme_registry['region'])) {
+    return;
+  }
+
   $preprocessors = array();
   foreach ($theme_registry['region']['preprocess functions'] as $function) {
     if ($function == 'zen_process') {
