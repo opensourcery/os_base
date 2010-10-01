@@ -8,19 +8,29 @@ function _os_base_block_account() {
   $block = array();
   $block['subject'] = '';
 
-  if (!user_is_anonymous()) {
-    $block['content'] = "<div class='user-account-menu block-toggle'>";
-    $block['content'] .= "<div class='block-title'><h3>". t('My account') ."</h3></div>";
-    $block['content'] .= "<div class='block-content clear-block'>". theme('links', os_base_account_links()) ."</div>";
-    $block['content'] .= "</div>";
-    return $block;
+  // build a dropdown block which reveals either a log in form or a list of
+  // account/user related links.
+  if (user_is_anonymous()) {
+    $class = 'log-in';
+    $item = menu_get_item('user/login');
+    $content = drupal_get_form('user_login');
   }
   else {
-    $item = menu_get_item('user/login');
-    if ($item && $item['access']) {
-      return array('content' => l($item['title'], $item['href']));
-    }
+    $class = 'my-account';
+    $item = menu_get_item('user');
+    $item['title'] = t('My account');
+    $content = theme('links', os_base_account_links());
   }
+
+  if ($item && $item['access']) {
+    $title = l($item['title'], $item['href']);
+
+    $block['content'] = "<div class='user-account-menu {$class} block-toggle'>";
+    $block['content'] .= "<div class='block-title'><h3>{$title}</h3></div>";
+    $block['content'] .= "<div class='block-content clear-block'>{$content}</div>";
+    $block['content'] .= "</div>";
+  }
+  return $block;
 }
 
 /**
