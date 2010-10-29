@@ -20,6 +20,7 @@ function os_base_user_default_permissions() {
     'name' => 'delete any page content',
     'roles' => array(
       '0' => 'administrator',
+      '1' => 'site editor',
     ),
   );
 
@@ -27,7 +28,8 @@ function os_base_user_default_permissions() {
   $permissions['delete own page content'] = array(
     'name' => 'delete own page content',
     'roles' => array(
-      '0' => 'site editor',
+      '0' => 'administrator',
+      '1' => 'site editor',
     ),
   );
 
@@ -43,7 +45,10 @@ function os_base_user_default_permissions() {
   // Exported permission: edit own page content
   $permissions['edit own page content'] = array(
     'name' => 'edit own page content',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'administrator',
+      '1' => 'site editor',
+    ),
   );
 
   return $permissions;
