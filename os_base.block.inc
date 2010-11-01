@@ -19,12 +19,13 @@ function _os_base_block_account() {
     $class = 'my-account';
     $item = menu_get_item('user');
     $item['title'] = t('My account');
-    $content = theme('links', os_base_account_links());
+    $content = '';
   }
 
   if ($item && $item['access']) {
     $title = l($item['title'], $item['href']);
 
+    $content .= theme('links', os_base_account_links($options));
     $block['content'] = "<div class='user-account-menu {$class} block-toggle'>";
     $block['content'] .= "<div class='block-title'><h3>{$title}</h3></div>";
     $block['content'] .= "<div class='block-content clear-block'>{$content}</div>";
@@ -38,14 +39,24 @@ function _os_base_block_account() {
  */
 function os_base_account_links() {
   global $user;
+
+  if (user_is_anonymous()) {
+    $paths = array(
+      'user/register' => t('Create new account'),
+      'user/password' => t('Forgot password?'),
+    );
+    $hook = 'os_base_account_links_anonymous';
+  }
+  else {
+    $paths = array(
+      "user/{$user->uid}" => t('Profile'),
+      "user/{$user->uid}/edit" => '',
+      'logout' => '',
+    );
+    $hook = 'os_base_account_links';
+  }
+
   $links = array();
-
-  $paths = array(
-    "user/{$user->uid}" => t('Profile'),
-    "user/{$user->uid}/edit" => '',
-    'logout' => '',
-  );
-
   foreach ($paths as $path => $title) {
     $item = menu_get_item($path);
     if ($item && $item['access']) {
@@ -55,6 +66,7 @@ function os_base_account_links() {
       );
     }
   }
-  drupal_alter('os_base_account_links', $links);
+  drupal_alter($hook, $links);
   return $links;
 }
+
