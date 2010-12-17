@@ -7,14 +7,6 @@
 include_once('os_base.features.inc');
 
 /**
- * Implementation of hook_init().
- */
-function os_base_init() {
-  $path = drupal_get_path('module', 'os_base');
-  drupal_add_js($path .'/os_base.js');
-}
-
-/**
  * Implementation of hook_block().
  */
 function os_base_block($op = 'view', $delta = 0, $edit = array()) {
@@ -28,6 +20,7 @@ function os_base_block($op = 'view', $delta = 0, $edit = array()) {
       module_load_include('inc', 'os_base', 'os_base.block');
       $function = "_os_base_block_{$delta}";
       if (function_exists($function)) {
+        drupal_add_js(drupal_get_path('module', 'os_base') .'/os_base.js');
         return call_user_func($function);
       }
       break;
