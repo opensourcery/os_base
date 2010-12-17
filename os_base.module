@@ -7,6 +7,15 @@
 include_once('os_base.features.inc');
 
 /**
+ * Implementation of hook_menu_alter().
+ * Remove /node, as it might display the "Welcome to your new Drupal website!"
+ * message, or a messy, unstyled node listing.
+ */
+function os_base_menu_alter(&$items) {
+  unset($items['node']);
+}
+
+/**
  * Implementation of hook_block().
  */
 function os_base_block($op = 'view', $delta = 0, $edit = array()) {
