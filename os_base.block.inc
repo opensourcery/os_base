@@ -42,26 +42,39 @@ function os_base_account_links() {
 
   if (user_is_anonymous()) {
     $paths = array(
-      'user/register' => t('Create new account'),
-      'user/password' => t('Forgot password?'),
+      'user/register' => array(
+        'title' => t('Create new account'),
+        'class' => 'user-register',
+      ),
+      'user/password' => array(
+        'title' => t('Forgot password?'),
+        'class' => 'user-password',
+      ),
     );
     $hook = 'os_base_account_links_anonymous';
   }
   else {
     $paths = array(
-      "user/{$user->uid}" => t('Profile'),
-      "user/{$user->uid}/edit" => '',
-      'logout' => '',
+      "user/{$user->uid}" => array(
+        'title' => t('Profile'),
+        'class' => 'profile',
+      ),
+      "user/{$user->uid}/edit" => array(
+        'class' => 'edit-profile',
+      ),
+      'logout' => array(
+        'class' => 'logout',
+      ),
     );
     $hook = 'os_base_account_links';
   }
 
   $links = array();
-  foreach ($paths as $path => $title) {
+  foreach ($paths as $path => $link) {
     $item = menu_get_item($path);
     if ($item && $item['access']) {
-      $links[] = array(
-        'title' => !empty($title) ? $title : $item['title'],
+      $links[$link['class']] = array(
+        'title' => !empty($link['title']) ? $link['title'] : $item['title'],
         'href' => $item['href'],
       );
     }
