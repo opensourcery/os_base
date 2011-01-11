@@ -23,12 +23,12 @@ function _os_base_block_account() {
   }
 
   if ($item && $item['access']) {
-    $title = l($item['title'], $item['href']);
+    $block['subject'] = l($item['title'], $item['href']);
+    drupal_alter('os_base_account_links_title', $block['subject']);
 
     $content .= theme('links', os_base_account_links($options));
-    $block['content'] = "<div class='user-account-menu {$class} block-toggle'>";
-    $block['content'] .= "<div class='block-title'><h3>{$title}</h3></div>";
-    $block['content'] .= "<div class='block-content clear-block'>{$content}</div>";
+    $block['content'] = '<div class="user-account-menu '. $class .' block-toggle block-content-dropdown clear-block">';
+    $block['content'] .= $content;
     $block['content'] .= "</div>";
   }
   return $block;
