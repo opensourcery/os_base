@@ -1,8 +1,6 @@
 core = "7.x"
-dependencies[] = "context_admin"
 dependencies[] = "ctools"
 dependencies[] = "features"
-dependencies[] = "page_manager"
 dependencies[] = "strongarm"
 description = "Base content types, roles and usability enhancements"
 features[ctools][] = "page_manager:pages_default:1"
