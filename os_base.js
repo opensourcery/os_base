@@ -27,3 +27,14 @@
       });
   };
 })(jQuery);
+$(document).ready(function(){
+  // If an event gets to the body
+  $("body").click(function(){
+    $("#block-os_base-account > .content").hide().siblings().removeClass("toggle-active");
+  });
+
+  // Prevent events from getting past the popup
+  $("#block-os_base-account > .content").click(function(e){
+    e.stopPropagation();
+  });
+});
