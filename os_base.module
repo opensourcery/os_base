@@ -54,6 +54,13 @@ function os_base_form_alter(&$form, $form_state, $form_id) {
         $form['workflow']['node_options']['#default_value'] = $options;
       }
       break;
+
+    case 'user_login':
+      if (variable_get('os_base_login_redirect', TRUE)) {
+        // Set login form to redirect back to the current page.
+        $form['#action'] = url($_GET['q'], array('query' => drupal_get_destination(), 'absolute' => TRUE));
+      }
+      break;
   }
 
   if (isset($form['type']['#value']) && $form_id == $form['type']['#value'] . '_node_form' && isset($form['revision_information'])) {
