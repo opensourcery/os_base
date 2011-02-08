@@ -2,7 +2,7 @@
   // Adapted from Open Atrium: http://openatrium.com
   Drupal.behaviors.osBase = function (context) {
     // Drop-down blocks
-    $('.dropdown-block:not(.processed)')
+    $('.dropdown-block:not(.processed)', context)
       .addClass('processed')
       .each(function() {
         $('.title', this).click(function(event) {
@@ -25,16 +25,20 @@
           return false;
         });
       });
+
+    // Close dropdown blocks if a click lands outside of them
+    // If an event gets to the body
+    $('body:not(.os_base-processed)', context)
+      .addClass('os_base-processed')
+      .click(function() {
+        $('.dropdown-block > .content').hide().siblings().removeClass('toggle-active');
+      });
+
+    // Prevent events from getting past the dropdown
+    $('.dropdown-block > .content:not(.os_base-processed)', context)
+      .addClass('os_base-processed')
+      .click(function(e) {
+        e.stopPropagation();
+      });
   };
 })(jQuery);
-$(document).ready(function(){
-  // If an event gets to the body
-  $("body").click(function(){
-    $("#block-os_base-account > .content").hide().siblings().removeClass("toggle-active");
-  });
-
-  // Prevent events from getting past the popup
-  $("#block-os_base-account > .content").click(function(e){
-    e.stopPropagation();
-  });
-});
