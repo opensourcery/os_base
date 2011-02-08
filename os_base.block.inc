@@ -19,19 +19,36 @@ function _os_base_block_account() {
     $class = 'my-account';
     $item = menu_get_item('user');
     $item['title'] = t('My account');
-    $content = '';
+    $content = theme('links', os_base_account_links());
   }
 
   if ($item && $item['access']) {
     $block['subject'] = l($item['title'], $item['href']);
     drupal_alter('os_base_account_links_title', $block['subject']);
 
-    $content .= theme('links', os_base_account_links($options));
     $block['content'] = '<div class="user-account-menu '. $class .' block-toggle block-content-dropdown clear-block">';
     $block['content'] .= $content;
     $block['content'] .= "</div>";
   }
   return $block;
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter() for core user_login form.
+ * Adds links to the login form for when it's in the dropdown account block.
+ */
+function os_base_form_user_login_alter(&$form, $form_state) {
+  // Only add the links when we're not on an actual login/register/password
+  // page, to avoid adding (unnecessary) links to the page's login form.
+  if (arg(0) == 'user' && (arg(1) == '' || arg(1) == 'login')) {
+    return;
+  }
+
+  $form['os_base-account-links'] = array(
+    '#type' => 'markup',
+    '#value' => theme('links', os_base_account_links()),
+    '#weight' => 100,
+  );
 }
 
 /**
