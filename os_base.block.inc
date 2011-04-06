@@ -62,10 +62,12 @@ function os_base_account_links() {
       'user/register' => array(
         'title' => t('Create new account'),
         'class' => 'user-register',
+        '#weight' => 0,
       ),
       'user/password' => array(
         'title' => t('Forgot password?'),
         'class' => 'user-password',
+        '#weight' => 5,
       ),
     );
     $hook = 'os_base_account_links_anonymous';
@@ -75,12 +77,15 @@ function os_base_account_links() {
       "user/{$user->uid}" => array(
         'title' => t('Profile'),
         'class' => 'profile',
+        '#weight' => 0,
       ),
       "user/{$user->uid}/edit" => array(
         'class' => 'edit-profile',
+        '#weight' => 5,
       ),
       'logout' => array(
         'class' => 'logout',
+        '#weight' => 10,
       ),
     );
     $hook = 'os_base_account_links';
@@ -93,10 +98,12 @@ function os_base_account_links() {
       $links[$link['class']] = array(
         'title' => !empty($link['title']) ? $link['title'] : $item['title'],
         'href' => $item['href'],
+        '#weight' => $link['#weight'],
       );
     }
   }
   drupal_alter($hook, $links);
+  uasort($links, 'element_sort');
   return $links;
 }
 
