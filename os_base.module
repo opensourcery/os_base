@@ -38,6 +38,16 @@ function os_base_block($op = 'view', $delta = 0, $edit = array()) {
 }
 
 /**
+ * Implementation of hook_admin_link_alter() (contextual.module).
+ */
+function os_base_admin_link_alter($links, $type, $object) {
+  // Don't show contextual links for the account dropdown
+  if ($type == 'block' && $object->module == 'os_base' && $object->delta == 'account') {
+    $links = array();
+  }
+}
+
+/**
  * Implementation of hook_form_alter().
  *
  * - Sets the revisions as enabled for new content types.
