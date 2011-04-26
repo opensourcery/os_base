@@ -71,6 +71,12 @@ function os_base_form_alter(&$form, $form_state, $form_id) {
         $form['#action'] = url($_GET['q'], array('query' => drupal_get_destination(), 'absolute' => TRUE));
       }
       break;
+    case 'boxes_box_form':
+      // Disable WYSIWYG from attaching to Boxes module inline box edit forms
+      if (($key = array_search('wysiwyg_process_form', $form['#after_build'])) !== FALSE) {
+        unset($form['#after_build'][$key]);
+      }
+      break;
   }
 
   if (isset($form['type']['#value']) && $form_id == $form['type']['#value'] . '_node_form' && isset($form['revision_information'])) {
