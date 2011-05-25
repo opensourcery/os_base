@@ -37,8 +37,8 @@ function os_base_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '845',
-          'height' => '475',
+          'width' => '860',
+          'height' => '266',
         ),
         'weight' => '1',
       ),
