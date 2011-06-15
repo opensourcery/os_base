@@ -10,6 +10,15 @@
 function os_base_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: administer filters
+  $permissions['administer filters'] = array(
+    'name' => 'administer filters',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
   // Exported permission: create page content
   $permissions['create page content'] = array(
     'name' => 'create page content',
@@ -58,6 +67,25 @@ function os_base_user_default_permissions() {
       1 => 'site editor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: use text format filtered_html
+  $permissions['use text format filtered_html'] = array(
+    'name' => 'use text format filtered_html',
+    'roles' => array(
+      0 => 'anonymous user',
+      1 => 'authenticated user',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: use text format full_html
+  $permissions['use text format full_html'] = array(
+    'name' => 'use text format full_html',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'filter',
   );
 
   return $permissions;
