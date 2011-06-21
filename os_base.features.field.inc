@@ -152,11 +152,131 @@ function os_base_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
+          'insert' => 0,
+          'insert_class' => '',
+          'insert_default' => 'auto',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__gallery-thumbnail' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__page-banner' => 0,
+            'colorbox__thumbnail' => 0,
+            'colorbox__visualization' => 0,
+            'image' => 0,
+            'image_gallery-thumbnail' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_page-banner' => 0,
+            'image_thumbnail' => 0,
+            'image_visualization' => 0,
+            'link' => 0,
+          ),
+          'insert_width' => '460',
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => 0,
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-page-field_page_images'
+  $fields['node-page-field_page_images'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_page_images',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'module' => 'image',
+      'settings' => array(
+        'default_image' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '1',
+      'type' => 'image',
+    ),
+    'field_instance' => array(
+      'bundle' => 'page',
+      'deleted' => '0',
+      'description' => 'Upload images to be associated with this node. Use the "Insert" button to paste the image (resized according your selection) into the page\'s <em>Body</em> area.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => '',
+          ),
+          'type' => 'image',
+          'weight' => 2,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_page_images',
+      'label' => 'Page Image(s)',
+      'required' => 0,
+      'settings' => array(
+        'alt_field' => 0,
+        'file_directory' => 'pages',
+        'file_extensions' => 'png gif jpg jpeg',
+        'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '',
+        'title_field' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'image',
+        'settings' => array(
+          'insert' => 1,
+          'insert_class' => '',
+          'insert_default' => 'auto',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__gallery-thumbnail' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__page-banner' => 0,
+            'colorbox__thumbnail' => 0,
+            'colorbox__visualization' => 0,
+            'image' => 'image',
+            'image_gallery-thumbnail' => 'image_gallery-thumbnail',
+            'image_large' => 'image_large',
+            'image_medium' => 'image_medium',
+            'image_page-banner' => 'image_page-banner',
+            'image_thumbnail' => 0,
+            'image_visualization' => 0,
+            'link' => 0,
+          ),
+          'insert_width' => '460',
+          'preview_image_style' => 'thumbnail',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'image_image',
+        'weight' => '3',
       ),
     ),
   );
@@ -166,6 +286,8 @@ function os_base_field_default_fields() {
   t('Banner image');
   t('Banner picture to be displayed at the top of the page.');
   t('Body');
+  t('Page Image(s)');
+  t('Upload images to be associated with this node. Use the "Insert" button to paste the image (resized according your selection) into the page\'s <em>Body</em> area.');
 
   return $fields;
 }
