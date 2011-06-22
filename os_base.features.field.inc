@@ -64,16 +64,17 @@ function os_base_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'body',
       'label' => 'Body',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
-        'display_summary' => TRUE,
-        'text_processing' => 1,
+        'display_summary' => 1,
+        'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'rows' => 20,
+          'rows' => '20',
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
@@ -119,12 +120,8 @@ function os_base_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'page-banner',
-          ),
-          'type' => 'image',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '0',
         ),
         'teaser' => array(
@@ -217,14 +214,10 @@ function os_base_field_default_fields() {
       'description' => 'Upload images to be associated with this node. Use the "Insert" button to paste the image (resized according your selection) into the page\'s <em>Body</em> area.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => '',
-          ),
-          'type' => 'image',
-          'weight' => 2,
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
