@@ -25,6 +25,7 @@ function os_base_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
@@ -41,11 +42,11 @@ function os_base_views_default_views() {
   $handler->display->display_options['fields']['field_page_banner']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_page_banner']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['field_page_banner']['alter']['ellipsis'] = 1;
   $handler->display->display_options['fields']['field_page_banner']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_page_banner']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['element_label_colon'] = 0;
   $handler->display->display_options['fields']['field_page_banner']['element_default_classes'] = 0;
@@ -92,17 +93,6 @@ function os_base_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['basic_page_banner_image'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('All'),
-    t('Block'),
-  );
   $export['basic_page_banner_image'] = $view;
 
   return $export;
