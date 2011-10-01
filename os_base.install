@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Installation for os_base.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function os_base_install() {
+  if (!node_type_load('page')) {
+    // Insert default pre-defined node types into the database. For a complete
+    // list of available node type attributes, refer to the node type API
+    // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+    $types = array(
+      array(
+        'type' => 'page',
+        'name' => st('Basic page'),
+        'base' => 'node_content',
+        'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+        'custom' => 1,
+        'modified' => 1,
+        'locked' => 0,
+      ),
+    );
+
+    foreach ($types as $type) {
+      $type = node_type_set_defaults($type);
+      node_type_save($type);
+      node_add_body_field($type);
+    }
+
+    // We don't want to force the RDF module to be installed by declaring it
+    // as a dependency, so enable it here. (This way it can be disabled later
+    // if desired.)
+    if (!module_exists('rdf')) {
+      module_enable(array('rdf'));
+    }
+
+    // Insert default pre-defined RDF mapping into the database.
+    $rdf_mappings = array(
+      array(
+        'type' => 'node',
+        'bundle' => 'page',
+        'mapping' => array(
+          'rdftype' => array('foaf:Document'),
+        ),
+      ),
+    );
+    foreach ($rdf_mappings as $rdf_mapping) {
+      rdf_mapping_save($rdf_mapping);
+    }
+  }
+
+  // Default "Basic page" to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for "Basic page" nodes by default.
+  variable_set('node_submitted_page', FALSE);
+
+  if (!variable_get('user_admin_role', 0)) {
+    // Create a default role for site administrators, with all available permissions assigned.
+    $admin_role = new stdClass();
+    $admin_role->name = 'administrator';
+    $admin_role->weight = 2;
+    user_role_save($admin_role);
+    user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+    // Set this as the administrator role.
+    variable_set('user_admin_role', $admin_role->rid);
+
+    // Assign user 1 the "administrator" role.
+    db_insert('users_roles')
+      ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+      ->execute();
+  }
+}
