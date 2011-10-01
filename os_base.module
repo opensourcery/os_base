@@ -16,28 +16,6 @@ function os_base_menu_alter(&$items) {
 }
 
 /**
- * Implementation of hook_block().
- */
-function os_base_block($op = 'view', $delta = 0, $edit = array()) {
-  switch ($op) {
-    case 'list':
-      $info = array(
-        'account' => array('info' => t('OS Base: User account')),
-      );
-      return $info;
-    case 'view':
-      module_load_include('inc', 'os_base', 'os_base.block');
-      $function = "_os_base_block_{$delta}";
-      if (function_exists($function)) {
-        drupal_add_js(drupal_get_path('module', 'os_base') .'/os_base.js');
-        return call_user_func($function);
-      }
-      break;
-  }
-
-}
-
-/**
  * Implementation of hook_form_alter().
  *
  * - Sets the revisions as enabled for new content types.
@@ -109,62 +87,6 @@ function os_base_preprocess_page(&$vars) {
   if (isset($vars['footer_message'])) {
     // Replace @year with current year.
     $vars['footer_message'] = str_replace('@year', date('Y'), $vars['footer_message']);
-  }
-}
-
-/**
- * Implementation of hook_theme_registry_alter().
- * Adds our preprocess function for blocks right before zen_process().
- */
-function os_base_theme_registry_alter(&$theme_registry) {
-  global $theme_key;
-
-  // We don't want to run for the admin theme
-  $admin_theme = variable_get('admin_theme', $theme_key);
-  if ($theme_key == $admin_theme || !isset($theme_registry['block'])) {
-    return;
-  }
-
-  $preprocessors = array();
-  foreach ($theme_registry['block']['preprocess functions'] as $function) {
-    if ($function == 'zen_process') {
-      $preprocessors[] = 'os_base_preprocess_block';
-    }
-    $preprocessors[] = $function;
-  }
-  $theme_registry['block']['preprocess functions'] = $preprocessors;
-}
-
-/**
- * Preprocess Zen blocks: assign "dropdown-block" class to block(s).
- *
- * Hooks invoked:
- * - hook_os_base_dropdown_blocks_alter():
- *   Implementors modify an array that lists which blocks should be given
- *   the dropdown-block class. Example:
- *
- *   hook_os_base_dropdown_blocks_alter(&$dropdown_blocks) {
- *     unset($dropdown_blocks['os_base:account']);
- *     $dropdown_blocks['my_module:my_block_delta'] = TRUE;
- *   }
- *
- */
-function os_base_preprocess_block(&$vars) {
-  static $determine = TRUE;
-  static $dropdown_blocks = array(
-    'os_base:account' => TRUE, // module:block delta
-  );
-
-  // determine which blocks to use (but just once)
-  if ($determine) {
-    $determine = FALSE;
-    drupal_alter('os_base_dropdown_blocks', $dropdown_blocks);
-  }
-
-  // Is the block we're preprocessing a dropdown block?
-  $module_block = $vars['block']->module .':'. $vars['block']->delta;
-  if (isset($dropdown_blocks[$module_block])) {
-    $vars['classes_array'][] = 'dropdown-block';
   }
 }
 
