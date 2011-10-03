@@ -16,6 +16,20 @@ function os_base_menu_alter(&$items) {
 }
 
 /**
+ * Implements hook_block_info_alter().
+ *
+ * Relies on patch from http://drupal.org/node/1251240 to be able to affect
+ * blocks listed by the Context module's block reaction.
+ */
+function os_base_block_info_alter(&$blocks, $theme, $code_blocks) {
+  // If the Menu Block module is active, then core menu module blocks should not
+  // be used, so remove all of menu module's blocks.
+  if (module_exists('menu_block')) {
+    $blocks['menu'] = array();
+  }
+}
+
+/**
  * Implementation of hook_form_alter().
  *
  * - Sets the revisions as enabled for new content types.
