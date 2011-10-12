@@ -32,24 +32,21 @@ function os_base_install() {
     }
 
     // We don't want to force the RDF module to be installed by declaring it
-    // as a dependency, so enable it here. (This way it can be disabled later
-    // if desired.)
-    if (!module_exists('rdf')) {
-      module_enable(array('rdf'));
-    }
-
-    // Insert default pre-defined RDF mapping into the database.
-    $rdf_mappings = array(
-      array(
-        'type' => 'node',
-        'bundle' => 'page',
-        'mapping' => array(
-          'rdftype' => array('foaf:Document'),
+    // as a dependency -- let the install profile decide whether to enable it.
+    if (module_exists('rdf')) {
+      // Insert default pre-defined RDF mapping into the database.
+      $rdf_mappings = array(
+        array(
+          'type' => 'node',
+          'bundle' => 'page',
+          'mapping' => array(
+            'rdftype' => array('foaf:Document'),
+          ),
         ),
-      ),
-    );
-    foreach ($rdf_mappings as $rdf_mapping) {
-      rdf_mapping_save($rdf_mapping);
+      );
+      foreach ($rdf_mappings as $rdf_mapping) {
+        rdf_mapping_save($rdf_mapping);
+      }
     }
   }
 
