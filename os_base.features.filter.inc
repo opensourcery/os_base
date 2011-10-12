@@ -16,7 +16,7 @@ function os_base_filter_default_formats() {
     'name' => 'Filtered HTML',
     'cache' => '1',
     'status' => '1',
-    'weight' => '0',
+    'weight' => '1',
     'filters' => array(
       'filter_url' => array(
         'weight' => '0',
@@ -53,7 +53,7 @@ function os_base_filter_default_formats() {
     'name' => 'Full HTML',
     'cache' => '1',
     'status' => '1',
-    'weight' => '1',
+    'weight' => '0',
     'filters' => array(
       'filter_url' => array(
         'weight' => '0',

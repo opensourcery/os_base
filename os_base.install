@@ -9,6 +9,24 @@
  * Implements hook_install().
  */
 function os_base_install() {
+  // Ensure our filters are installed.
+  features_rebuild(array('os_base' => array('filter')));
+
+  // Enable default permissions for system roles.
+  $filtered_html_format = filter_format_load('filtered_html');
+  $filtered_html_permission = filter_permission_name($filtered_html_format);
+
+  // Trying to grant a non-existing permission (e.g. comment permission when
+  // comment isn't active) causes a database constraint violation.
+  if (module_exists('comment')) {
+    user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments', $filtered_html_permission));
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', $filtered_html_permission));
+  }
+  else {
+    user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', $filtered_html_permission));
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', $filtered_html_permission));
+  }
+
   if (!node_type_load('page')) {
     // Insert default pre-defined node types into the database. For a complete
     // list of available node type attributes, refer to the node type API
