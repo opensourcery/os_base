@@ -7,12 +7,22 @@
 include_once('os_base.features.inc');
 
 /**
- * Implementation of hook_menu_alter().
- * Remove /node, as it might display the "Welcome to your new Drupal website!"
- * message, or a messy, unstyled node listing.
+ * Implements hook_menu_alter().
+ * - Removes /node, as it might display the "Welcome to your new Drupal website!"
+ *   message, or a messy, unstyled node listing.
+ * - Denies non-administrators access to field-collection view pages.
  */
 function os_base_menu_alter(&$items) {
   unset($items['node']);
+
+  // Turn off access to field-collection pages except for administrators.
+  foreach (field_info_fields() as $field) {
+    if ($field['type'] == 'field_collection') {
+      $path = field_collection_field_get_path($field);
+      $items[$path . '/%field_collection_item']['access callback'] = 'user_access';
+      $items[$path . '/%field_collection_item']['access arguments'] = array('administer fieldgroups');
+    }
+  }
 }
 
 /**
