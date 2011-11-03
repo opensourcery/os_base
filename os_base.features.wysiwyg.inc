@@ -67,6 +67,13 @@ function os_base_wysiwyg_default_profiles() {
           'BulletedList' => 1,
           'NumberedList' => 1,
           'Link' => 1,
+          'Image' => 1,
+          'TextColor' => 1,
+          'BGColor' => 1,
+          'Format' => 1,
+        ),
+        'drupal' => array(
+          'media' => 1,
         ),
       ),
       'toolbar_loc' => 'top',
