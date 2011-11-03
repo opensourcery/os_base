@@ -10,6 +10,36 @@
 function os_base_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access contextual links
+  $permissions['access contextual links'] = array(
+    'name' => 'access contextual links',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'site editor',
+    ),
+    'module' => 'contextual',
+  );
+
+  // Exported permission: access overlay
+  $permissions['access overlay'] = array(
+    'name' => 'access overlay',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'site editor',
+    ),
+    'module' => 'overlay',
+  );
+
+  // Exported permission: access toolbar
+  $permissions['access toolbar'] = array(
+    'name' => 'access toolbar',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'site editor',
+    ),
+    'module' => 'toolbar',
+  );
+
   // Exported permission: administer filters
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
