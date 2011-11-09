@@ -121,3 +121,19 @@ function os_base_preprocess_views_view(&$vars) {
     $vars['empty'] = !empty($output) ? $output : t('There is currently no content to view in this section.');
   }
 }
+
+/**
+ * Implements hook_user_default_permissions_alter(). (Features hook.)
+ */
+function os_base_user_default_permissions_alter(&$permissions) {
+  // This is a workaround that allows us to export permissions for modules
+  // without making them a hard dependency. This simply removes permissions
+  // whose modules are not currently enabled.
+  $modules_enabled = module_list();
+  foreach ($permissions as $key => $perm) {
+    if (!isset($modules_enabled[$perm['module']])) {
+      // Module isn't enabled; simply remove the permission.
+      unset($permissions[$key]);
+    }
+  }
+}
