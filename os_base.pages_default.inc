@@ -37,7 +37,7 @@ function os_base_default_page_manager_pages() {
       2 => array(
         'name' => 'node_menu_depth',
         'settings' => array(
-          'menu' => 'primary-links',
+          'menu' => 'main-menu',
           'menu_depth' => 'p3',
         ),
         'context' => 'argument_nid_1',
