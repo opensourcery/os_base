@@ -131,6 +131,9 @@ function os_base_user_default_permissions_alter(&$permissions) {
   // whose modules are not currently enabled.
   $modules_enabled = module_list();
   foreach ($permissions as $key => $perm) {
+    if(empty($perm['module'])){
+      continue;
+    }
     if (!isset($modules_enabled[$perm['module']])) {
       // Module isn't enabled; simply remove the permission.
       unset($permissions[$key]);
