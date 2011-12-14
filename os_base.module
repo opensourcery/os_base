@@ -6,6 +6,15 @@
 include_once('os_base.features.inc');
 
 /**
+ * Implements hook_admin_paths().
+ */
+function os_base_admin_paths() {
+  return array(
+    'node/*/add-sub-page' => TRUE,
+  );
+}
+
+/**
  * Implements hook_menu_alter().
  * - Removes /node, as it might display the "Welcome to your new Drupal website!"
  *   message, or a messy, unstyled node listing.
