@@ -34,15 +34,6 @@ function os_base_default_page_manager_pages() {
         ),
         'context' => 'logged-in-user',
       ),
-      2 => array(
-        'name' => 'node_menu_depth',
-        'settings' => array(
-          'menu' => 'main-menu',
-          'menu_depth' => 'p3',
-        ),
-        'context' => 'argument_nid_1',
-        'not' => FALSE,
-      ),
     ),
     'logic' => 'and',
     'type' => 'none',
@@ -89,6 +80,29 @@ function os_base_default_page_manager_pages() {
     'context_admin_options_items' => 'page',
     'context_admin_sub_page' => 1,
     'submitted_context' => 'argument_nid_1',
+    'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_menu_depth',
+          'settings' => array(
+            'menu' => 'menu-header-menu',
+            'menu_depth' => 'p3',
+          ),
+          'context' => 'argument_nid_1',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'node_menu_depth',
+          'settings' => array(
+            'menu' => 'menu-footer-menu',
+            'menu_depth' => 'p3',
+          ),
+          'context' => 'argument_nid_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'or',
+    ),
   );
   $page->default_handlers[$handler->name] = $handler;
   $pages['sub_page'] = $page;
