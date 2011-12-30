@@ -87,16 +87,7 @@ function os_base_default_page_manager_pages() {
         0 => array(
           'name' => 'node_menu_depth',
           'settings' => array(
-            'menu' => 'menu-header-menu',
-            'menu_depth' => 'p3',
-          ),
-          'context' => 'argument_nid_1',
-          'not' => FALSE,
-        ),
-        1 => array(
-          'name' => 'node_menu_depth',
-          'settings' => array(
-            'menu' => 'menu-footer-menu',
+            'menu' => 'main-menu',
             'menu_depth' => 'p3',
           ),
           'context' => 'argument_nid_1',
