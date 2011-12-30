@@ -105,7 +105,7 @@ function os_base_date_formats() {
  */
 function os_base_image_styles_alter(&$styles) {
   foreach (array('medium', 'large', 'thumbnail') as $remove) {
-    if (isset($styles[$remove]) && $styles[$remove]['module'] == 'image') {
+    if (isset($styles[$remove]) && $styles[$remove]['module'] == 'image' && $styles[$remove]['storage'] === IMAGE_STORAGE_DEFAULT) {
       unset($styles[$remove]);
     }
   }
