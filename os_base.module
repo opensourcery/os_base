@@ -99,6 +99,19 @@ function os_base_date_formats() {
 }
 
 /**
+ * Implements hook_image_styles_alter().
+ *
+ * Remove core's default 'medium', 'large' and 'thumbnail' styles if defined by core. Note, the media module adds a square_thumbnail of 180x180.
+ */
+function os_base_image_styles_alter(&$styles) {
+  foreach (array('medium', 'large', 'thumbnail') as $remove) {
+    if (isset($styles[$remove]) && $styles[$remove]['module'] == 'image') {
+      unset($styles[$remove]);
+    }
+  }
+}
+
+/**
  * Preprocess page variables.
  */
 function os_base_preprocess_page(&$vars) {
