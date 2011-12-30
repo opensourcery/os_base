@@ -59,7 +59,9 @@ function os_base_default_page_manager_pages() {
       'settings' => array(),
     ),
   );
-  $page->conf = array();
+  $page->conf = array(
+    'admin_paths' => TRUE,
+  );
   $page->default_handlers = array();
   $handler = new stdClass;
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
