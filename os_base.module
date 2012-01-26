@@ -104,9 +104,11 @@ function os_base_date_formats() {
  * Remove core's default 'medium', 'large' and 'thumbnail' styles if defined by core. Note, the media module adds a square_thumbnail of 180x180.
  */
 function os_base_image_styles_alter(&$styles) {
-  foreach (array('medium', 'large', 'thumbnail') as $remove) {
-    if (isset($styles[$remove]) && $styles[$remove]['module'] == 'image' && $styles[$remove]['storage'] === IMAGE_STORAGE_DEFAULT) {
-      unset($styles[$remove]);
+  if (variable_get('os_base_remove_core_image_styles', FALSE)) {
+    foreach (array('medium', 'large', 'thumbnail') as $remove) {
+      if (isset($styles[$remove]) && $styles[$remove]['module'] == 'image' && $styles[$remove]['storage'] === IMAGE_STORAGE_DEFAULT) {
+        unset($styles[$remove]);
+      }
     }
   }
 }
