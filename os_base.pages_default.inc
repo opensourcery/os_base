@@ -35,9 +35,10 @@ function os_base_default_page_manager_pages() {
         'context' => 'logged-in-user',
       ),
       2 => array(
-        'name' => 'node_menu',
+        'name' => 'node_menu_depth',
         'settings' => array(
           'menu' => 'main-menu',
+          'menu_depth' => 'p3',
         ),
         'context' => 'argument_nid_1',
         'not' => FALSE,
