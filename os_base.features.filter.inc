@@ -75,11 +75,6 @@ function os_base_filter_default_formats() {
           ),
         ),
       ),
-      'filter_autop' => array(
-        'weight' => '1',
-        'status' => '1',
-        'settings' => array(),
-      ),
       'media_filter' => array(
         'weight' => '2',
         'status' => '1',
