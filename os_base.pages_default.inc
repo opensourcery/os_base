@@ -8,7 +8,7 @@
  * Implements hook_default_page_manager_pages().
  */
 function os_base_default_page_manager_pages() {
-  $page = new stdClass;
+  $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
   $page->name = 'sub_page';
@@ -72,7 +72,7 @@ function os_base_default_page_manager_pages() {
     'admin_paths' => TRUE,
   );
   $page->default_handlers = array();
-  $handler = new stdClass;
+  $handler = new stdClass();
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
   $handler->name = 'page_sub_page_menu_context';
@@ -109,6 +109,6 @@ function os_base_default_page_manager_pages() {
   $page->default_handlers[$handler->name] = $handler;
   $pages['sub_page'] = $page;
 
- return $pages;
+  return $pages;
 
 }
