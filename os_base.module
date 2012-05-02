@@ -109,7 +109,7 @@ function os_base_date_formats() {
 function os_base_image_styles_alter(&$styles) {
   if (variable_get('os_base_remove_core_image_styles', FALSE)) {
     foreach (array('medium', 'large', 'thumbnail') as $remove) {
-      if (isset($styles[$remove]) && $styles[$remove]['module'] == 'image' && $styles[$remove]['storage'] === IMAGE_STORAGE_DEFAULT) {
+      if (isset($styles[$remove]['module']) && $styles[$remove]['module'] == 'image' && isset($styles[$remove]['storage']) && $styles[$remove]['storage'] === IMAGE_STORAGE_DEFAULT) {
         unset($styles[$remove]);
       }
     }
