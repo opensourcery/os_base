@@ -133,18 +133,19 @@ function os_base_preprocess_views_view(&$vars) {
   $view = $vars['view'];
   if ($view->base_table === 'node' && strpos($view->current_display, 'page') !== FALSE && empty($view->result) && empty($vars['empty'])) {
     $types = node_type_get_types();
+    $output = array();
     foreach ($view->filter as $handler) {
       if ($handler->table === 'node' && $handler->field === 'type' && !empty($handler->options['value']) && $handler->options['operator'] === 'in') {
         foreach (array_filter($handler->options['value']) as $type) {
           $item = menu_get_item('node/add/'. strtr($type, array('_' => '-')));
           if ($item && $item['access']) {
-            $output = t('Please <a href="!url">add your first @type</a> to get started.', array('@type' => $types[$type]->name, '!url' => url('node/add/' . $type)));
+            $output[] = t('Please <a href="!url">add your first @type</a> to get started.', array('@type' => $types[$type]->name, '!url' => url('node/add/' . $type)));
            }
         }
         break;
       }
     }
-    $vars['empty'] = !empty($output) ? $output : t('There is currently no content to view in this section.');
+    $vars['empty'] = !empty($output) ? implode('<br />', $output) : t('There is currently no content to view in this section.');
   }
 }
 
