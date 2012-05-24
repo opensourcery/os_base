@@ -34,7 +34,7 @@ function os_base_menu_alter(&$items) {
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements hook_form_alter().
  *
  * - Sets the revisions as enabled for new content types.
  */
@@ -62,7 +62,7 @@ function os_base_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
- * Implementations of hook_date_format_types().
+ * Implements hook_date_format_types().
  */
 function os_base_date_format_types() {
   return array(
@@ -72,7 +72,7 @@ function os_base_date_format_types() {
 }
 
 /**
- * Implementation of hook_date_formats().
+ * Implements hook_date_formats().
  */
 function os_base_date_formats() {
   $condensed = array(
@@ -150,7 +150,7 @@ function os_base_preprocess_views_view(&$vars) {
 }
 
 /**
- * Implements hook_user_default_permissions_alter(). (Features hook.)
+ * Implements hook_user_default_permissions_alter().
  */
 function os_base_user_default_permissions_alter(&$permissions) {
   // This is a workaround that allows us to export permissions for modules

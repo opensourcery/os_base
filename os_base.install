@@ -28,15 +28,17 @@ function os_base_install() {
   }
 
   if (!node_type_load('page')) {
+    $t = get_t();
+
     // Insert default pre-defined node types into the database. For a complete
     // list of available node type attributes, refer to the node type API
     // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
     $types = array(
       array(
         'type' => 'page',
-        'name' => st('Basic page'),
+        'name' => $t('Basic page'),
         'base' => 'node_content',
-        'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+        'description' => $t("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
         'custom' => 1,
         'modified' => 1,
         'locked' => 0,
