@@ -137,7 +137,7 @@ function os_base_preprocess_views_view(&$vars) {
     foreach ($view->filter as $handler) {
       if ($handler->table === 'node' && $handler->field === 'type' && !empty($handler->options['value']) && $handler->options['operator'] === 'in') {
         foreach (array_filter($handler->options['value']) as $type) {
-          $item = menu_get_item('node/add/'. strtr($type, array('_' => '-')));
+          $item = menu_get_item('node/add/' . strtr($type, array('_' => '-')));
           if ($item && $item['access']) {
             $output[] = t('Please <a href="!url">add your first @type</a> to get started.', array('@type' => $types[$type]->name, '!url' => url('node/add/' . $type)));
            }
