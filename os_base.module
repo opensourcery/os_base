@@ -140,7 +140,7 @@ function os_base_preprocess_views_view(&$vars) {
           $item = menu_get_item('node/add/' . strtr($type, array('_' => '-')));
           if ($item && $item['access']) {
             $output[] = t('Please <a href="!url">add your first @type</a> to get started.', array('@type' => $types[$type]->name, '!url' => url('node/add/' . $type)));
-           }
+          }
         }
         break;
       }
@@ -158,7 +158,7 @@ function os_base_user_default_permissions_alter(&$permissions) {
   // whose modules are not currently enabled.
   $modules_enabled = module_list();
   foreach ($permissions as $key => $perm) {
-    if(empty($perm['module'])){
+    if (empty($perm['module'])) {
       continue;
     }
     if (!isset($modules_enabled[$perm['module']])) {
