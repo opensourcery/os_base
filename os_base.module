@@ -81,6 +81,7 @@ function os_base_date_formats() {
       'l, M j',
       'l, j M',
       'n/j/Y',
+      'F jS, Y',
     ),
     'time' => array(
       'g:ia',
@@ -88,6 +89,11 @@ function os_base_date_formats() {
       'g:ia T',
     ),
   );
+
+  // Allow day formats to be used for core-supplied formats.
+  foreach (array('short', 'medium', 'long') as $format) {
+    $condensed[$format] = $condensed['day'];
+  }
   $formats = array();
   foreach ($condensed as $type => $f) {
     foreach ($f as $format) {
