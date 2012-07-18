@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * Overrides for various features to work on OpenSourcery testing infrastructure.
+ */
+
+/**
+ * Apache Solr/tomcat6 port on gargravarr.
+ */
+define('OS_TESTING_SOLR_PORT', 8089);
+
+/**
+ * Regex to match virtual host on gargravarr.
+ */
+define('OS_TESTING_HOST_REGEX', '#(.*)\.opensourcery\.com$#');
+
+/**
+ * Implements hook_apachesolr_environments_alter().
+ *
+ * Override the Solr url when on gargravarr to use proper search index. Note
+ * that this only works if the default index uses the default machine name of
+ * `solr`.
+ */
+function os_testing_apachesolr_environments_alter(&$environments) {
+  if (isset($environments['solr']) && $host = _os_testing_is_test_host()) {
+    $solr_url = 'http://localhost:' . OS_TESTING_SOLR_PORT . '/solr/' . $host;
+    $environments['solr']->url = $solr_url;
+  }
+}
+
+/**
+ * Helper function to determine if running on a test host.
+ *
+ * @return string
+ *   Name of the virtual host or FALSE if not running on a test host.
+ */
+function _os_testing_is_test_host() {
+  $host = FALSE;
+
+  if (isset($_SERVER['SERVER_NAME']) && preg_match(OS_TESTING_HOST_REGEX, $_SERVER['SERVER_NAME'], $match)) {
+    $host = $match[1];
+  }
+
+  return $host;
+}
