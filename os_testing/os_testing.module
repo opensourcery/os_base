@@ -38,7 +38,7 @@ function os_testing_apachesolr_environments_alter(&$environments) {
 function _os_testing_is_test_host() {
   $host = FALSE;
 
-  if (isset($_SERVER['SERVER_NAME']) && preg_match(OS_TESTING_HOST_REGEX, $_SERVER['SERVER_NAME'], $match)) {
+  if (isset($_SERVER['HTTP_HOST']) && preg_match(OS_TESTING_HOST_REGEX, $_SERVER['HTTP_HOST'], $match)) {
     $host = $match[1];
   }
 
