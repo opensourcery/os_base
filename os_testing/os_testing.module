@@ -1,7 +1,8 @@
 <?php
 /**
  * @file
- * Overrides for various features to work on OpenSourcery testing infrastructure.
+ * Overrides for various features to work on OpenSourcery testing
+ * infrastructure.
  */
 
 /**
