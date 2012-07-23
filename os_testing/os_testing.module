@@ -30,6 +30,22 @@ function os_testing_apachesolr_environments_alter(&$environments) {
 }
 
 /**
+ * Implements hook_strongarm_alter().
+ *
+ * Setup Apache Tika path if this site is using apachesolr attachments.
+ */
+function os_testing_strongarm_alter(&$variables) {
+  if (_os_testing_is_test_host()) {
+    if (isset($variables['apachesolr_attachments_tika_jar'])) {
+      $variables['apachesolr_attachments_tika_jar']->value = 'tika-app-1.2.jar';
+    }
+    if (isset($variables['apachesolr_attachements_tika_path'])) {
+      $variables['apachesolr_attachments_tika_path']->value = '/usr/local/lib/apache-tika';
+    }
+  }
+}
+
+/**
  * Helper function to determine if running on a test host.
  *
  * @return string
