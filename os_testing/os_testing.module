@@ -30,6 +30,22 @@ function os_testing_apachesolr_environments_alter(&$environments) {
 }
 
 /**
+ * Implements hook_default_search_api_server_alter().
+ *
+ * Override the Solr server options when on gargravarr. Note that this assumes
+ * the default server machine name of `default`.
+ */
+function os_testing_default_search_api_server_alter(array &$defaults) {
+  if (isset($defaults['default']) && $host = _os_testing_is_test_host()) {
+    $defaults['default']['options']['host'] = 'localhost';
+    $defaults['default']['options']['port'] = OS_TESTING_SOLR_PORT;
+    $defaults['default']['options']['path'] = '/solr/' . $host;
+    $defaults['default']['options']['http_user'] = '';
+    $defaults['default']['options']['http_pass'] = '';
+  }
+}
+
+/**
  * Implements hook_strongarm_alter().
  *
  * Setup Apache Tika path if this site is using apachesolr attachments.
