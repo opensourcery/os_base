@@ -3,7 +3,8 @@
  * @file
  * OpenSourcery base feature and enhancements.
  */
-include_once('os_base.features.inc');
+
+include_once 'os_base.features.inc';
 
 /**
  * Implements hook_admin_paths().
@@ -16,9 +17,10 @@ function os_base_admin_paths() {
 
 /**
  * Implements hook_menu_alter().
- * - Removes /node, as it might display the "Welcome to your new Drupal website!"
- *   message, or a messy, unstyled node listing.
- * - Denies non-administrators access to field-collection view pages.
+ *
+ * Removes /node, as it might display the "Welcome to your new Drupal website!"
+ * message, or a messy, unstyled node listing and denies non-administrators
+ * access to field-collection view pages.
  */
 function os_base_menu_alter(&$items) {
   unset($items['node']);
@@ -110,7 +112,8 @@ function os_base_date_formats() {
 /**
  * Implements hook_image_styles_alter().
  *
- * Remove core's default 'medium', 'large' and 'thumbnail' styles if defined by core. Note, the media module adds a square_thumbnail of 180x180.
+ * Remove core's default 'medium', 'large' and 'thumbnail' styles if defined by
+ * core. Note, the media module adds a square_thumbnail of 180x180.
  */
 function os_base_image_styles_alter(&$styles) {
   if (variable_get('os_base_remove_core_image_styles', FALSE)) {

@@ -73,14 +73,17 @@ function os_base_install() {
   // Default "Basic page" to not be promoted and have comments disabled.
   variable_set('node_options_page', array('status'));
 
-  // COMMENT_* defines aren't present if comment module isn't enabled, so use literal value.
+  // COMMENT_* defines aren't present if comment module isn't enabled, so use
+  // literal value.
   variable_set('comment_page', 0 /* COMMENT_NODE_HIDDEN */);
 
-  // Don't display date and author information for "Basic page" nodes by default.
+  // Don't display date and author information for "Basic page" nodes by
+  // default.
   variable_set('node_submitted_page', FALSE);
 
   if (!variable_get('user_admin_role', 0)) {
-    // Create a default role for site administrators, with all available permissions assigned.
+    // Create a default role for site administrators, with all available
+    // permissions assigned.
     $admin_role = new stdClass();
     $admin_role->name = 'administrator';
     $admin_role->weight = 2;
