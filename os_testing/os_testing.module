@@ -58,6 +58,12 @@ function os_testing_strongarm_alter(&$variables) {
     if (isset($variables['apachesolr_attachements_tika_path'])) {
       $variables['apachesolr_attachments_tika_path']->value = '/usr/local/lib/apache-tika';
     }
+    if (isset($variables['search_api_attachments_tika_jar'])) {
+      $variables['search_api_attachments_tika_jar']->value = 'tika-app-1.2.jar';
+    }
+    if (isset($variables['search_api_attachments_tika_path'])) {
+      $variables['search_api_attachments_tika_path']->value = '/usr/local/lib/apache-tika';
+    }
   }
 }
 
