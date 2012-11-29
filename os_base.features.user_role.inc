@@ -10,13 +10,13 @@
 function os_base_user_default_roles() {
   $roles = array();
 
-  // Exported role: administrator
+  // Exported role: administrator.
   $roles['administrator'] = array(
     'name' => 'administrator',
     'weight' => '3',
   );
 
-  // Exported role: site editor
+  // Exported role: site editor.
   $roles['site editor'] = array(
     'name' => 'site editor',
     'weight' => '4',
