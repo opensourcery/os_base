@@ -40,4 +40,4 @@ features[variable][] = node_submitted_page
 features[variable][] = pathauto_node_page_pattern
 features[wysiwyg][] = filtered_html
 features[wysiwyg][] = full_html
-project status url = http://code.opensourcery.com/fserver
+;project status url = http://code.opensourcery.com/fserver
