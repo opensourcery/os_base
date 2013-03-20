@@ -53,13 +53,13 @@ function os_testing_default_search_api_server_alter(array &$defaults) {
 function os_testing_strongarm_alter(&$variables) {
   if (_os_testing_is_test_host()) {
     if (isset($variables['apachesolr_attachments_tika_jar'])) {
-      $variables['apachesolr_attachments_tika_jar']->value = 'tika-app-1.2.jar';
+      $variables['apachesolr_attachments_tika_jar']->value = 'tika-app-1.3.jar';
     }
     if (isset($variables['apachesolr_attachements_tika_path'])) {
       $variables['apachesolr_attachments_tika_path']->value = '/usr/local/lib/apache-tika';
     }
     if (isset($variables['search_api_attachments_tika_jar'])) {
-      $variables['search_api_attachments_tika_jar']->value = 'tika-app-1.2.jar';
+      $variables['search_api_attachments_tika_jar']->value = 'tika-app-1.3.jar';
     }
     if (isset($variables['search_api_attachments_tika_path'])) {
       $variables['search_api_attachments_tika_path']->value = '/usr/local/lib/apache-tika';
