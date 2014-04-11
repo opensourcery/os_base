@@ -14,8 +14,8 @@ function os_base_user_default_permissions() {
   $permissions['access contextual links'] = array(
     'name' => 'access contextual links',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'contextual',
   );
@@ -24,8 +24,8 @@ function os_base_user_default_permissions() {
   $permissions['access overlay'] = array(
     'name' => 'access overlay',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'overlay',
   );
@@ -34,8 +34,8 @@ function os_base_user_default_permissions() {
   $permissions['access toolbar'] = array(
     'name' => 'access toolbar',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'toolbar',
   );
@@ -44,7 +44,7 @@ function os_base_user_default_permissions() {
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'filter',
   );
@@ -53,8 +53,8 @@ function os_base_user_default_permissions() {
   $permissions['create page content'] = array(
     'name' => 'create page content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'node',
   );
@@ -63,8 +63,8 @@ function os_base_user_default_permissions() {
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'node',
   );
@@ -73,8 +73,8 @@ function os_base_user_default_permissions() {
   $permissions['delete own page content'] = array(
     'name' => 'delete own page content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'node',
   );
@@ -83,8 +83,8 @@ function os_base_user_default_permissions() {
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'node',
   );
@@ -93,8 +93,8 @@ function os_base_user_default_permissions() {
   $permissions['edit own page content'] = array(
     'name' => 'edit own page content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site editor',
+      'administrator' => 'administrator',
+      'site editor' => 'site editor',
     ),
     'module' => 'node',
   );
@@ -103,8 +103,8 @@ function os_base_user_default_permissions() {
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',
     'roles' => array(
-      0 => 'anonymous user',
-      1 => 'authenticated user',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'filter',
   );
@@ -113,7 +113,7 @@ function os_base_user_default_permissions() {
   $permissions['use text format full_html'] = array(
     'name' => 'use text format full_html',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'filter',
   );
